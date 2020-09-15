@@ -1,25 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { createBrowserHistory } from "history";
+import { Route, Redirect, Router, Switch } from "react-router-dom";
+import "./App.css";
+import RegisterPage from "./components/registerPage";
+import PreviewPage from "./components/previewPage";
+
+export const history = createBrowserHistory();
 
 function App() {
+  const [state, setState] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    uploadedFile: "",
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router history={history}>
+      <Switch>
+        <Route path="/preview">
+          <PreviewPage state={state} setState={setState} />
+        </Route>
+        <Route exact path="/">
+          <RegisterPage state={state} setState={setState} />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
