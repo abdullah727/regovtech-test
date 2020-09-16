@@ -1,7 +1,21 @@
-import React, { useState } from "react";
-import { Button, Card, Form, FormGroup, Label, Input, Alert } from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import {
+  Button,
+  Card,
+  Form,
+  FormGroup,
+  Label,
+  Input,
+  Alert,
+  FormText,
+} from "reactstrap";
 import { history } from "../App";
 export interface LoginProps {}
+const dummyCredentials = {
+  dummyEmail: "test@gmail.com",
+  dummyPassword: "admin",
+};
 const Login: React.FunctionComponent<LoginProps> = () => {
   const [error, toggleError] = useState(false);
   const [state, setState] = useState({
@@ -9,17 +23,22 @@ const Login: React.FunctionComponent<LoginProps> = () => {
     password: "",
   });
   const { email, password } = state;
-
+  useEffect(() => {
+    const isLogin = localStorage.getItem("email");
+    if (isLogin) history.push("/");
+  });
   const handleInputChange = (property: string) => (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => setState({ ...state, [property]: event.target.value });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password) {
-      toggleError(true);
-    } else {
+    const { dummyEmail, dummyPassword } = dummyCredentials;
+    if (email === dummyEmail && password === dummyPassword) {
+      localStorage.setItem("email", email);
       history.push("/");
+    } else {
+      toggleError(true);
     }
   };
   return (
@@ -54,12 +73,19 @@ const Login: React.FunctionComponent<LoginProps> = () => {
                 required
               />
             </FormGroup>
-
+            <FormText color="muted">
+              Email is "test@gmail.com" & Password is "admin"
+            </FormText>
             {error && <Alert color="danger">Invalid Email or Password!!</Alert>}
             <div className=" mt-4">
               <Button color="danger" type="submit">
                 Login
               </Button>
+              <NavLink to="/register">
+                <Button color="danger" className="ml-4">
+                  Register
+                </Button>
+              </NavLink>
             </div>
           </Form>
         </Card>

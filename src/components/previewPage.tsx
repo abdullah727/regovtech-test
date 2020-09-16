@@ -20,7 +20,6 @@ const PreviewPage: React.FunctionComponent<PreviewPageProps> = ({
   setState,
 }) => {
   const [edit, onEdit] = useState(false);
-  console.log("edit", edit);
   const [error, toggleError] = useState(false);
   const {
     firstName,
@@ -44,13 +43,17 @@ const PreviewPage: React.FunctionComponent<PreviewPageProps> = ({
     }
   };
   const handleSubmit = (e: React.FormEvent) => {
-    console.log("jerer");
     e.preventDefault();
-    if (password !== confirmPassword) {
-      toggleError(true);
+
+    if (edit) {
+      if (password !== confirmPassword) {
+        toggleError(true);
+      } else {
+        onEdit(false);
+      }
     } else {
-      onEdit(false);
-      // history.push("/preview");
+      localStorage.setItem("email", email);
+      history.push("/");
     }
   };
   return (

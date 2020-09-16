@@ -30,7 +30,7 @@ function App() {
         <Route path="/register">
           <RegisterPage state={state} setState={setState} />
         </Route>
-        <Route exact path="/">
+        <Route path="/">
           <MainPage />
         </Route>
       </Switch>

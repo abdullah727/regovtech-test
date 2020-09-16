@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Button, Card, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import { history } from "../App";
 interface StateProps {
@@ -138,6 +139,11 @@ const RegisterPage: React.FunctionComponent<RegisterPageProps> = (props) => {
               <Button color="danger" type="submit">
                 Register
               </Button>
+              <NavLink to="/login">
+                <Button color="danger" className="ml-4" type="submit">
+                  Login
+                </Button>
+              </NavLink>
             </div>
           </Form>
         </Card>

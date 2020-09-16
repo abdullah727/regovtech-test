@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Collapse,
   NavLink,
@@ -7,31 +7,40 @@ import {
   NavbarBrand,
   NavbarToggler,
   NavItem,
-  NavbarText,
 } from "reactstrap";
+import { history } from "../App";
 
 export interface MainPageProps {}
 
 const MainPage: React.FunctionComponent<MainPageProps> = () => {
+  useEffect(() => {
+    const isLogin = localStorage.getItem("email");
+    if (!isLogin) history.push("/login");
+  });
+  const handleLogout = () => {
+    localStorage.clear();
+    history.push("/login");
+  };
   return (
     <div>
       <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">reactstrap</NavbarBrand>
         <NavbarToggler />
         <Collapse isOpen={false} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
               <NavLink href="/components/">Components</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink href="https://github.com/reactstrap/reactstrap">
-                GitHub
-              </NavLink>
-            </NavItem>
           </Nav>
-          <NavbarText>Simple Text</NavbarText>
+          <NavbarBrand className="cursor-pointer" onClick={handleLogout}>
+            Logout
+          </NavbarBrand>
         </Collapse>
       </Navbar>
+      <h1>Welcome to the Home Page</h1>
+      <div>
+        <span>Registeration Status:</span>
+        <b>APPROVED</b>
+      </div>
     </div>
   );
 };
