@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Card,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-  Alert,
-} from "reactstrap";
+import { Button, Card, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 
 import { history } from "../App";
 
@@ -53,114 +44,124 @@ const PreviewPage: React.FunctionComponent<PreviewPageProps> = ({
     }
   };
   const handleSubmit = (e: React.FormEvent) => {
+    console.log("jerer");
     e.preventDefault();
     if (password !== confirmPassword) {
       toggleError(true);
     } else {
-      history.push("/preview");
+      onEdit(false);
+      // history.push("/preview");
     }
   };
   return (
-    <Card>
-      {!edit && (
-        <>
-          <div>
-            <div>First Name: </div>
-            <div>{firstName}</div>
-          </div>
-          <div>
-            <div>Last Name: </div>
-            <div>{lastName}</div>
-          </div>
-          <div>
-            <div>Email: </div>
-            <div>{email}</div>
-          </div>
-          <div>
-            <div>Uploaded File: </div>
-            <img src={uploadedFile} height={150} width={150} />
-          </div>
-        </>
-      )}
-      {edit && (
-        <Form onSubmit={handleSubmit}>
-          <FormGroup>
-            <Label for="firstName">First Name</Label>
-            <Input
-              onChange={handleInputChange("firstName")}
-              placeholder="Enter First Name..."
-              value={firstName}
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="lastName">Last Name</Label>
-            <Input
-              onChange={handleInputChange("lastName")}
-              placeholder="Enter Last Name..."
-              value={lastName}
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="email">Email</Label>
-            <Input
-              onChange={handleInputChange("email")}
-              type="email"
-              placeholder="Please write an email"
-              value={email}
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="password">Password</Label>
-            <Input
-              type="password"
-              onChange={handleInputChange("password")}
-              placeholder="Please enter password"
-              value={password}
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="confirmPass">Confirm Password</Label>
-            <Input
-              type="password"
-              onChange={handleInputChange("confirmPassword")}
-              placeholder="Please re-enter password"
-              value={confirmPassword}
-              required
-            />
-          </FormGroup>
+    <div className="container">
+      <div className="col-12 mt-5">
+        <Card className="text-center font-weight-bold">
+          <h1>Preview</h1>
+          <Form onSubmit={handleSubmit}>
+            {!edit && (
+              <>
+                <div className="d-flex justify-content-around mt-5">
+                  <div>First Name: </div>
+                  <div>{firstName}</div>
+                </div>
+                <div className="d-flex justify-content-around mh-20">
+                  <div>Last Name: </div>
+                  <div>{lastName}</div>
+                </div>
+                <div className="d-flex justify-content-around mh-20">
+                  <div>Email: </div>
+                  <div>{email}</div>
+                </div>
+                <div className="d-flex justify-content-around mh-20">
+                  <div>Uploaded File: </div>
+                  <img src={uploadedFile} height={150} width={150} />
+                </div>
+              </>
+            )}
+            {edit && (
+              <>
+                <FormGroup>
+                  <Label for="firstName">First Name</Label>
+                  <Input
+                    onChange={handleInputChange("firstName")}
+                    placeholder="Enter First Name..."
+                    value={firstName}
+                    required
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="lastName">Last Name</Label>
+                  <Input
+                    onChange={handleInputChange("lastName")}
+                    placeholder="Enter Last Name..."
+                    value={lastName}
+                    required
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="email">Email</Label>
+                  <Input
+                    onChange={handleInputChange("email")}
+                    type="email"
+                    placeholder="Please write an email"
+                    value={email}
+                    required
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="password">Password</Label>
+                  <Input
+                    type="password"
+                    onChange={handleInputChange("password")}
+                    placeholder="Please enter password"
+                    value={password}
+                    required
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="confirmPass">Confirm Password</Label>
+                  <Input
+                    type="password"
+                    onChange={handleInputChange("confirmPassword")}
+                    placeholder="Please re-enter password"
+                    value={confirmPassword}
+                    required
+                  />
+                </FormGroup>
 
-          <FormGroup>
-            <Label for="exampleFile">File</Label>
-            <Input
-              accept="image/x-png,image/gif,image/jpeg"
-              type="file"
-              name="file"
-              id="exampleFile"
-              onChange={handleImgUpload}
-              required
-            />
-            <FormText color="muted">
-              This is some placeholder block-level help text for the above
-              input. It's a bit lighter and easily wraps to a new line.
-            </FormText>
-          </FormGroup>
-          <img
-            src={
-              uploadedFile ? uploadedFile : "https://via.placeholder.com/150"
-            }
-            height={150}
-            width={150}
-          />
-          <Button type="submit">Submit</Button>
-          {error && <Alert color="danger">Passwords donot match!!</Alert>}
-        </Form>
-      )}
-      <Button onClick={() => onEdit(true)}>Edit</Button>
-    </Card>
+                <FormGroup>
+                  <Label for="exampleFile">File</Label>
+                  <Input
+                    accept="image/x-png,image/gif,image/jpeg"
+                    type="file"
+                    name="file"
+                    id="exampleFile"
+                    onChange={handleImgUpload}
+                  />
+                </FormGroup>
+                <img
+                  src={
+                    uploadedFile
+                      ? uploadedFile
+                      : "https://via.placeholder.com/150"
+                  }
+                  height={150}
+                  width={150}
+                />
+                {error && <Alert color="danger">Passwords donot match!!</Alert>}
+              </>
+            )}
+            <div className="mt-4">
+              {!edit && <Button onClick={() => onEdit(true)}>Edit</Button>}
+              <Button className="ml-3" type="submit">
+                Submit
+              </Button>
+            </div>
+          </Form>
+        </Card>
+      </div>
+    </div>
   );
 };
 

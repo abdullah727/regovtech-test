@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Card,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormText,
-  Alert,
-} from "reactstrap";
+import { Button, Card, Form, FormGroup, Label, Input, Alert } from "reactstrap";
 import { history } from "../App";
 interface StateProps {
   firstName: string;
@@ -55,82 +46,103 @@ const RegisterPage: React.FunctionComponent<RegisterPageProps> = (props) => {
     }
   };
   return (
-    <Card>
-      <h1>Sign up</h1>
-      <Form onSubmit={handleSubmit}>
-        <FormGroup>
-          <Label for="firstName">First Name</Label>
-          <Input
-            onChange={handleInputChange("firstName")}
-            placeholder="Enter First Name..."
-            value={firstName}
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="lastName">Last Name</Label>
-          <Input
-            onChange={handleInputChange("lastName")}
-            placeholder="Enter Last Name..."
-            value={lastName}
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="email">Email</Label>
-          <Input
-            onChange={handleInputChange("email")}
-            type="email"
-            placeholder="Please write an email"
-            value={email}
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password</Label>
-          <Input
-            type="password"
-            onChange={handleInputChange("password")}
-            placeholder="Please enter password"
-            value={password}
-            required
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="confirmPass">Confirm Password</Label>
-          <Input
-            type="password"
-            onChange={handleInputChange("confirmPassword")}
-            placeholder="Please re-enter password"
-            value={confirmPassword}
-            required
-          />
-        </FormGroup>
+    <div className="container">
+      <div className="d-flex col-12 justify-content-center align-items-center mt-5 text-white ">
+        <Card className="text-center w-500 background-night p-4">
+          <h1>Sign up</h1>
+          <Form className="mt-5" onSubmit={handleSubmit}>
+            <FormGroup className="d-flex">
+              <Label className="col-3 mt-2" for="firstName">
+                First Name
+              </Label>
+              <Input
+                onChange={handleInputChange("firstName")}
+                placeholder="Enter First Name..."
+                value={firstName}
+                className="col-9"
+                required
+              />
+            </FormGroup>
+            <FormGroup className="d-flex">
+              <Label className="col-3 mt-2" for="lastName">
+                Last Name
+              </Label>
+              <Input
+                onChange={handleInputChange("lastName")}
+                placeholder="Enter Last Name..."
+                value={lastName}
+                className="col-9"
+                required
+              />
+            </FormGroup>
+            <FormGroup className="d-flex">
+              <Label className="col-3 mt-2" for="email">
+                Email
+              </Label>
+              <Input
+                onChange={handleInputChange("email")}
+                type="email"
+                placeholder="Please write an email"
+                className="col-9"
+                value={email}
+                required
+              />
+            </FormGroup>
+            <FormGroup className="d-flex">
+              <Label className="col-3 mt-2" for="password">
+                Password
+              </Label>
+              <Input
+                type="password"
+                onChange={handleInputChange("password")}
+                placeholder="Please enter password"
+                value={password}
+                className="col-9"
+                required
+              />
+            </FormGroup>
+            <FormGroup className="d-flex">
+              <Label className="col-3 mt-2" for="confirmPass">
+                Confirm Password
+              </Label>
+              <Input
+                type="password"
+                onChange={handleInputChange("confirmPassword")}
+                placeholder="Please re-enter password"
+                value={confirmPassword}
+                className="col-9"
+                required
+              />
+            </FormGroup>
 
-        <FormGroup>
-          <Label for="exampleFile">File</Label>
-          <Input
-            accept="image/x-png,image/gif,image/jpeg"
-            type="file"
-            name="file"
-            id="exampleFile"
-            onChange={handleImgUpload}
-            required
-          />
-          <FormText color="muted">
-            This is some placeholder block-level help text for the above input.
-            It's a bit lighter and easily wraps to a new line.
-          </FormText>
-        </FormGroup>
-        <img
-          src={uploadedFile ? uploadedFile : "https://via.placeholder.com/150"}
-          height={150}
-          width={150}
-        />
-        {error && <Alert color="danger">Passwords donot match!!</Alert>}
-        <Button type="submit">Submit</Button>
-      </Form>
-    </Card>
+            <FormGroup className="d-flex">
+              <Input
+                accept="image/x-png,image/gif,image/jpeg"
+                type="file"
+                name="file"
+                id="exampleFile"
+                onChange={handleImgUpload}
+                className="col-9"
+                required
+              />
+            </FormGroup>
+            <img
+              src={
+                uploadedFile ? uploadedFile : "https://via.placeholder.com/150"
+              }
+              height={150}
+              width={150}
+            />
+            {error && <Alert color="danger">Passwords donot match!!</Alert>}
+            <div className=" mt-4">
+              <Button color="danger" type="submit">
+                Register
+              </Button>
+            </div>
+          </Form>
+        </Card>
+      </div>
+    </div>
   );
 };
 
